@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # hyperparameters
     batch_size = 128
     learning_rate = 0.001
-    num_epochs = 20
+    num_epochs = 1
     momentum = 0.9
     weight_decay = 1e-4
 
@@ -83,29 +83,21 @@ if __name__ == '__main__':
     stop_training = False
 
     for epoch in range(num_epochs):
+        for i, (input, target_output, _) in enumerate(train_loader):
+            total_batch_count += 1
 
-        with tqdm(total=n_batches) as pbar:
+            input = input.to(device)
+            target_output = target_output.to(device)
 
-            for i, (input, target_output, _) in enumerate(train_loader):
-                total_batch_count += 1
+            output, _ = model(input)
 
-                input = input.to(device)
-                target_output = target_output.to(device)
+            loss = criterion(output, target_output).mean()
 
-                output, _ = model(input)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
 
-                loss = criterion(output, target_output).mean()
-
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
-
-                pbar.update()
-                pbar.set_description(f'Epoch {epoch:04d} Loss: {loss.item():.4f}')
-
-                # print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tLoss: {loss.item():.4f}')
-
-            pbar.close()
+            # print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tLoss: {loss.item():.4f}')
 
         # evaluate train/val error
         model.eval()
