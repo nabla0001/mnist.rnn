@@ -14,7 +14,8 @@ it knows where the digits need to continue; it also frequently infers correctly
 which digit it needs to draw based on the occluded digit - something that is not always obvious.
 It then gets their overall gestalt right. 
 
-Quite cool considering that, unlike when we train classification models, we have never told the model explicitly that the digits 0-9 exist!
+Quite cool considering that, unlike when we train classification models, 
+we have never told the model explicitly that the digits 0-9 exist!
 
 Here are some examples. 
 
@@ -30,8 +31,8 @@ However, there are also still many failure cases:
 
 ![example 0](plots/0216.gif)
 ![example 0](plots/1809.gif)
+![example 0](plots/2653.gif)
 
-# failure cases
 
 ## Details
 
