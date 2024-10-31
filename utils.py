@@ -47,10 +47,14 @@ def complete_mnist(model, data_loader, device, n_pixels):
 
     generated_pixels = []
     given_pixels = []
+    ground_truth = []
     labels = []
 
     with torch.no_grad():
         for i, (input, _, label) in tqdm(enumerate(data_loader), total=len(data_loader), desc='Completing MNIST'):
+
+            ground_truth.append(input.squeeze(2))
+
             input = input[:, :n_pixels, :]
             input = input.to(device)
 
@@ -68,5 +72,6 @@ def complete_mnist(model, data_loader, device, n_pixels):
     given_pixels = torch.cat(given_pixels, dim=0)
     generated_pixels = torch.cat(generated_pixels, dim=0)
     labels = torch.cat(labels, dim=0)
+    ground_truth = torch.cat(ground_truth, dim=0)
 
-    return given_pixels, generated_pixels, labels
+    return given_pixels, generated_pixels, labels, ground_truth
