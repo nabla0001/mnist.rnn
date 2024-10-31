@@ -45,7 +45,7 @@ if __name__ == '__main__':
     # hyperparameters
     batch_size = 128
     learning_rate = 0.001
-    num_epochs = 1
+    num_epochs = 20
     momentum = 0.9
     weight_decay = 1e-4
 
@@ -67,6 +67,7 @@ if __name__ == '__main__':
 
     experiment = {
         'name': args.exp_name,
+        'loss': [],
         'train_loss': [],
         'val_loss': [],
         'test_loss': None,
@@ -101,6 +102,8 @@ if __name__ == '__main__':
 
             loss = criterion(output, target_output).mean()
 
+            experiment['loss'].append(loss.item())
+
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
@@ -117,7 +120,9 @@ if __name__ == '__main__':
         experiment['train_loss'].append(train_loss)
         experiment['batch'].append(total_batch_count)
 
+        print()
         print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tTrain loss: {train_loss:.4f}\tVal loss: {val_loss:.4f}')
+        print()
 
         model.train()
 
