@@ -33,7 +33,31 @@ However, there are also still many failure cases:
 ![example 0](plots/1809.gif)
 ![example 0](plots/2653.gif)
 
-
 ## Details
 
 *(WIP)*
+
+## Usage
+
+You can re-create my `conda` environment via
+
+```shell
+conda env create -f env.yml
+```
+
+To run experiments
+
+
+```shell
+conda activate pytorch
+
+python train.py --exp-name gru-128 --hidden 128
+```
+see `train.py` for all available command line options.
+
+Each experiment produces two files: 
+1. a results file (`.pkl`) containing training/test metrics
+2. a model checkpoint (`.ckpt`) 
+
+which are written to a subfolder `{exp_name}` in `experiments` (configurable via command line).
+
