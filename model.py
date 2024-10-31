@@ -2,11 +2,12 @@ import torch
 import torch.nn as nn
 
 class RNN(nn.Module):
-    def __init__(self, hidden_size: int, num_layers: int = 1):
+    def __init__(self, hidden_size: int, num_layers: int = 1, dropout: float = 0.0):
         super().__init__()
         self.rnn = nn.GRU(input_size=1,
                           hidden_size=hidden_size,
                           num_layers=num_layers,
+                          dropout=dropout,
                           batch_first=True)
         self.linear = nn.Linear(in_features=hidden_size, out_features=1)
         self.sigmoid = nn.Sigmoid()

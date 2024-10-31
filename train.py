@@ -12,6 +12,8 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Trains RNN to generate MNIST images.')
     parser.add_argument('--hidden-size', type=int, default=128)
+    parser.add_argument('--num-layers', type=int, default=1)
+    parser.add_argument('--dropout', type=float, default=0.0)
     parser.add_argument('--checkpoint', type=str, default=None)
     parser.add_argument('--exp-name', type=str, required=True)
     parser.add_argument('--exp-dir', type=str, default='experiments')
@@ -52,7 +54,7 @@ if __name__ == '__main__':
     train_loader, val_loader, test_loader = mnist_data_loaders(batch_size, data_dir=args.data_dir, binarise=True)
 
     # model
-    model = RNN(args.hidden_size)
+    model = RNN(args.hidden_size, args.num_layers, args.dropout)
 
     # resume training if specified
     if args.checkpoint is not None:
