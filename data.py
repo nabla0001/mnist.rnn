@@ -12,10 +12,6 @@ class MNISTPixelData(torch.utils.data.Dataset):
             input: flattened image 1x783 (ignore last pixel since no target exists)
             target output: flattened image shifted by 1 pixel
             digit class: 1-hot encoded class
-
-        Args:
-            data: MNIST dataset
-        Returns:
         """
         super().__init__()
 

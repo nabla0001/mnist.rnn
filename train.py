@@ -2,7 +2,7 @@ import torch
 from torchinfo import summary
 from model import RNN
 from data import mnist_data_loaders
-from utils import save_experiment
+from utils import save_experiment, evaluate_loss
 
 from datetime import datetime
 import argparse
@@ -96,17 +96,19 @@ if __name__ == '__main__':
             loss.backward()
             optimizer.step()
 
-            print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tLoss: {loss.item():.4f}')
+            # print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tLoss: {loss.item():.4f}')
 
         # evaluate train/val error
-        # model.eval()
-        # TODO
-        # model.train()
+        model.eval()
 
-        # experiment['train_error'].append(train_error)
-        # experiment['val_error'].append(val_error)
-        # experiment['batch'].append(total_batch_count)
+        val_loss = evaluate_loss(model, val_loader, criterion, device, 10)
+        train_loss = evaluate_loss(model, train_loader, criterion, device, 10)
 
+        experiment['val_loss'].append(val_loss)
+        experiment['train_loss'].append(train_loss)
+        experiment['batch'].append(total_batch_count)
+
+        model.train()
 
     # evaluate model
     # TODO

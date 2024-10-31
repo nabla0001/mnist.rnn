@@ -17,11 +17,9 @@ class RNN(nn.Module):
         output = self.sigmoid(output)
         return output, hidden
 
-    def sample(self, input: torch.Tensor, hidden: torch.Tensor = None, steps: int = 1):
-        """Generates a pixel sequence given an input pixel sequence.
-
-        After consuming the input sequence, generates new pixels one at a time
-        where the output pixel at step (t) is used as the input at (t+1).
+    def sample(self, input: torch.Tensor, hidden: torch.Tensor = None, steps: int = 1) -> torch.Tensor:
+        """Generates a pixel sequence given an input pixel sequence one at a time.
+        The output pixel at step (t) is used as the input at (t+1).
         """
         with torch.no_grad():
             # consume input sequence
