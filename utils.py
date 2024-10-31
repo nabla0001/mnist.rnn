@@ -43,8 +43,6 @@ def complete_mnist(model, data_loader, device, n_pixels):
         model.eval()
 
     n_steps = 784 - n_pixels
-    batch_size = data_loader.batch_size
-    n = batch_size * len(data_loader)
 
     generated_pixels = []
     given_pixels = []
