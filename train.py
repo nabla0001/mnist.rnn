@@ -13,6 +13,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Trains RNN to generate MNIST images.')
     parser.add_argument('--hidden-size', type=int, default=128)
+    parser.add_argument('--checkpoint', type=str, default=None)
     parser.add_argument('--exp-name', type=str, required=True)
     parser.add_argument('--exp-dir', type=str, default='experiments')
     parser.add_argument('--data-dir', type=str, default='data')
@@ -53,6 +54,13 @@ if __name__ == '__main__':
 
     # model
     model = RNN(args.hidden_size)
+
+    # resume training if specified
+    if args.checkpoint is not None:
+        model.load_state_dict(torch.load(Path(args.checkpoint), weights_only=True))
+        model.train()
+
+        print(f'Resuming training from checkpoint {args.checkpoint}')
 
     print(summary(model, (batch_size, 784, 1), verbose=2))
     model.to(device)
@@ -97,7 +105,7 @@ if __name__ == '__main__':
             loss.backward()
             optimizer.step()
 
-            # print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tLoss: {loss.item():.4f}')
+            print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tLoss: {loss.item():.4f}')
 
         # evaluate train/val error
         model.eval()
