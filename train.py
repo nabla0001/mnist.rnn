@@ -89,7 +89,6 @@ if __name__ == '__main__':
     # train
     n_batches = len(train_loader)
     total_batch_count = 0
-    stop_training = False
 
     for epoch in range(num_epochs):
         for i, (input, target_output, _) in enumerate(train_loader):
@@ -128,9 +127,6 @@ if __name__ == '__main__':
 
         # save model checkpoint
         torch.save(model.state_dict(), checkpoint_path)
-
-    # evaluate model
-    # TODO
 
     # save results
     save_experiment(experiment, experiment_path)
