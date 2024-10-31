@@ -121,11 +121,11 @@ if __name__ == '__main__':
 
         model.train()
 
+        # save model checkpoint
+        torch.save(model.state_dict(), checkpoint_path)
+
     # evaluate model
     # TODO
 
     # save results
     save_experiment(experiment, experiment_path)
-
-    # Save the model checkpoint
-    torch.save(model.state_dict(), checkpoint_path)
