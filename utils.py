@@ -14,7 +14,7 @@ def save_experiment(experiment: dict, filepath: Union[str, pathlib.PosixPath]) -
 def evaluate_loss(model: torch.nn.Module,
                   data_loader: DataLoader,
                   criterion,
-                  device: str,
+                  device: torch.device,
                   num_batches: Optional[int] = None) -> float:
 
     if model.training:
@@ -41,7 +41,7 @@ def evaluate_loss(model: torch.nn.Module,
 
 def complete_mnist(model: torch.nn.Module,
                    data_loader: DataLoader,
-                   device: str,
+                   device: torch.device,
                    n_pixels: int) -> tuple[torch.Tensor]:
     """Given incomplete MNIST pixel sequences generate remaining pixels with RNN."""
 
