@@ -49,6 +49,7 @@ if __name__ == '__main__':
     num_epochs = 20
     momentum = 0.9
     weight_decay = 1e-4
+    learning_rate_scheduler_kwargs = {'milestones': [4, 8], 'gamma': 0.1}
 
     # data
     train_loader, val_loader, test_loader = mnist_data_loaders(batch_size, data_dir=args.data_dir, binarise=True)
@@ -79,6 +80,7 @@ if __name__ == '__main__':
             'num_epochs': num_epochs,
             'momentum': momentum,
             'weight_decay': weight_decay,
+            'learning_rate_scheduler_kwargs': learning_rate_scheduler_kwargs,
         },
         'args': args
     }
@@ -86,6 +88,9 @@ if __name__ == '__main__':
     # loss & optimiser
     criterion = torch.nn.MSELoss(reduction='none')
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+    # learning rate schedule
+    scheduler = torch.optim.lr_scheduler.MultiStepLR(optimizer, **learning_rate_scheduler_kwargs)
 
     # train
     n_batches = len(train_loader)
