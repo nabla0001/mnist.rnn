@@ -7,6 +7,7 @@ from utils import save_experiment, evaluate_loss
 from datetime import datetime
 import argparse
 from pathlib import Path
+from tqdm import tqdm
 
 if __name__ == '__main__':
 
@@ -82,21 +83,29 @@ if __name__ == '__main__':
     stop_training = False
 
     for epoch in range(num_epochs):
-        for i, (input, target_output, _) in enumerate(train_loader):
-            total_batch_count += 1
 
-            input = input.to(device)
-            target_output = target_output.to(device)
+        with tqdm(total=n_batches) as pbar:
 
-            output, _ = model(input)
+            for i, (input, target_output, _) in enumerate(train_loader):
+                total_batch_count += 1
 
-            loss = criterion(output, target_output).mean()
+                input = input.to(device)
+                target_output = target_output.to(device)
 
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
+                output, _ = model(input)
 
-            # print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tLoss: {loss.item():.4f}')
+                loss = criterion(output, target_output).mean()
+
+                optimizer.zero_grad()
+                loss.backward()
+                optimizer.step()
+
+                pbar.update()
+                pbar.set_description(f'Epoch {epoch:04d} Loss: {loss.item():.4f}')
+
+                # print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tLoss: {loss.item():.4f}')
+
+            pbar.close()
 
         # evaluate train/val error
         model.eval()
@@ -107,6 +116,8 @@ if __name__ == '__main__':
         experiment['val_loss'].append(val_loss)
         experiment['train_loss'].append(train_loss)
         experiment['batch'].append(total_batch_count)
+
+        print(f'Epoch [{epoch:04d}/{num_epochs:04d}]\tBatch [{total_batch_count:06d}]\tTrain loss: {train_loss:.4f}\tVal loss: {val_loss:.4f}')
 
         model.train()
 

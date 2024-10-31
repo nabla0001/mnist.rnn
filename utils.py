@@ -34,3 +34,34 @@ def evaluate_loss(model,
             loss[i] = criterion(output, target_output).mean()
 
         return loss.mean().item()
+
+
+def complete_mnist(model, data_loader, device, n_pixels):
+    """Given incomplete MNIST pixel sequences generate remaining pixels with RNN."""
+
+    if model.training:
+        model.eval()
+
+    n_steps = 784 - n_pixels
+    batch_size = data_loader.batch_size
+    n = batch_size * len(data_loader)
+
+    generated_pixels = []
+    given_pixels = []
+
+    with torch.no_grad():
+        for i, (input, _, _) in enumerate(data_loader):
+            input = input[:, :n_pixels, :]
+            input = input.to(device)
+
+            given_pixels.append(input)
+
+            generated = model.sample(input, n_steps=n_steps)  # N x n_steps x 1
+            generated = generated.squeeze()
+
+            generated_pixels.append(generated)
+
+    given_pixels = torch.cat(given_pixels, dim=0)
+    generated_pixels = torch.cat(generated_pixels, dim=0)
+
+    return given_pixels, generated_pixels

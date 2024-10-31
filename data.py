@@ -51,8 +51,8 @@ def mnist_data_loaders(batch_size: int = 128, data_dir: str = 'data') -> tuple[D
     idx = torch.randperm(len(train))
     train_idx, val_idx = idx[:n_train], idx[n_train:]
 
-    train = torch.utils.data.Subset(train, train_idx)
     val = torch.utils.data.Subset(train, val_idx)
+    train = torch.utils.data.Subset(train, train_idx)
 
     train_loader = torch.utils.data.DataLoader(train, batch_size, shuffle=True)
     val_loader = torch.utils.data.DataLoader(val, batch_size, shuffle=True)
