@@ -50,7 +50,7 @@ if __name__ == '__main__':
     weight_decay = 1e-4
 
     # data
-    train_loader, val_loader, test_loader = mnist_data_loaders(batch_size, data_dir=args.data_dir)
+    train_loader, val_loader, test_loader = mnist_data_loaders(batch_size, data_dir=args.data_dir, binarise=True)
 
     # model
     model = RNN(args.hidden_size)
@@ -84,6 +84,7 @@ if __name__ == '__main__':
 
     # loss & optimiser
     criterion = torch.nn.MSELoss(reduction='none')
+    # criterion = torch.nn.BCELoss(reduction='none')
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
     # train

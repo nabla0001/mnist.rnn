@@ -1,6 +1,7 @@
 import torch
 import pickle
 import pathlib
+from tqdm import tqdm
 from typing import Optional, Union
 
 def save_experiment(experiment: dict, filepath: Union[str, pathlib.PosixPath]) -> None:
@@ -46,9 +47,10 @@ def complete_mnist(model, data_loader, device, n_pixels):
 
     generated_pixels = []
     given_pixels = []
+    labels = []
 
     with torch.no_grad():
-        for i, (input, _, _) in enumerate(data_loader):
+        for i, (input, _, label) in tqdm(enumerate(data_loader), total=len(data_loader), desc='Completing MNIST'):
             input = input[:, :n_pixels, :]
             input = input.to(device)
 
@@ -59,7 +61,12 @@ def complete_mnist(model, data_loader, device, n_pixels):
 
             generated_pixels.append(generated)
 
+            label = label.argmax(axis=1)
+            label = label.unsqueeze(1)
+            labels.append(label)
+
     given_pixels = torch.cat(given_pixels, dim=0)
     generated_pixels = torch.cat(generated_pixels, dim=0)
+    labels = torch.cat(labels, dim=0)
 
-    return given_pixels, generated_pixels
+    return given_pixels, generated_pixels, labels
