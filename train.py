@@ -84,7 +84,6 @@ if __name__ == '__main__':
 
     # loss & optimiser
     criterion = torch.nn.MSELoss(reduction='none')
-    # criterion = torch.nn.BCELoss(reduction='none')
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
     # train
