@@ -1,4 +1,6 @@
 import torch
+from torch.utils.data import DataLoader
+
 import pickle
 import pathlib
 from tqdm import tqdm
@@ -9,10 +11,10 @@ def save_experiment(experiment: dict, filepath: Union[str, pathlib.PosixPath]) -
     with open(filepath, 'wb') as f:
         pickle.dump(experiment, f)
 
-def evaluate_loss(model,
-                  data_loader,
+def evaluate_loss(model: torch.nn.Module,
+                  data_loader: DataLoader,
                   criterion,
-                  device,
+                  device: str,
                   num_batches: Optional[int] = None) -> float:
 
     if model.training:
@@ -37,7 +39,10 @@ def evaluate_loss(model,
         return loss.mean().item()
 
 
-def complete_mnist(model, data_loader, device, n_pixels):
+def complete_mnist(model: torch.nn.Module,
+                   data_loader: DataLoader,
+                   device: str,
+                   n_pixels: int) -> tuple[torch.Tensor]:
     """Given incomplete MNIST pixel sequences generate remaining pixels with RNN."""
 
     if model.training:
