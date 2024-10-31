@@ -50,9 +50,6 @@ def mnist_data_loaders(batch_size: int = 128, data_dir: str = 'data') -> tuple[D
     train = MNISTPixelData(train)
     test = MNISTPixelData(test)
 
-    print(f'Train: {len(train)}')
-    print(f'Test: {len(test)}')
-
     # 55k/5k train/val split
     n_train = 55000
     idx = torch.randperm(len(train))
@@ -60,9 +57,6 @@ def mnist_data_loaders(batch_size: int = 128, data_dir: str = 'data') -> tuple[D
 
     train = torch.utils.data.Subset(train, train_idx)
     val = torch.utils.data.Subset(train, val_idx)
-
-    print(f'Train: {len(train)}')
-    print(f'Val: {len(val)}')
 
     train_loader = torch.utils.data.DataLoader(train, batch_size, shuffle=True)
     val_loader = torch.utils.data.DataLoader(val, batch_size, shuffle=True)
