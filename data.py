@@ -35,9 +35,14 @@ class MNISTPixelData(torch.utils.data.Dataset):
         return self.data[index]
 
 
-def mnist_data_loaders(batch_size: int = 128, data_dir: str = 'data') -> tuple[DataLoader, DataLoader, DataLoader]:
+def mnist_data_loaders(batch_size: int = 128,
+                       data_dir: str = 'data',
+                       binarise: bool = False) -> tuple[DataLoader, DataLoader, DataLoader]:
 
-    transform = transforms.Compose([transforms.ToTensor()])
+    if binarise:
+        transform = transforms.Compose([transforms.ToTensor(), transforms.Lambda(lambda image: (image > 0.1).type(torch.float))])
+    else:
+        transform = transforms.Compose([transforms.ToTensor()])
 
     train = MNIST(root=data_dir, train=True, download=True, transform=transform)
     test = MNIST(root=data_dir, train=False, download=True, transform=transform)
