@@ -7,7 +7,6 @@ from utils import save_experiment, evaluate_loss
 from datetime import datetime
 import argparse
 from pathlib import Path
-from tqdm import tqdm
 
 if __name__ == '__main__':
 

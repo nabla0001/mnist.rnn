@@ -1,11 +1,11 @@
 import torch
 from torchvision.datasets import MNIST
 from torchvision.transforms import transforms
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Dataset
 
 
-class MNISTPixelData(torch.utils.data.Dataset):
-    def __init__(self, data: torch.utils.data.Dataset):
+class MNISTPixelData(Dataset):
+    def __init__(self, data: Dataset):
         """Custom dataset for MNIST prediction task
 
         Each sample consists of
