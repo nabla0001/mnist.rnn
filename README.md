@@ -1,6 +1,6 @@
 # Generating MNIST with a Recurrent Neural Network
 
-A fun little project to learn how to train Recurrent Neural Networks (RNN) in PyTorch.
+A fun little project to get started with Recurrent Neural Networks (RNN) in PyTorch.
 
 ## The idea
 
