@@ -13,6 +13,9 @@ a single next pixel given a sequence of pixels. In phase 2 (*testing*), we'll th
 MNIST images? To test this we'll present the model with partially masked, unseen MNIST digits
 and ask it to complete them.
 
+The goal here is not to chase state-of-the-art performance at image generation but
+to understand the capabilities of RNNs with a simple example.
+
 ## Experiment
 
 Here are the details of the first experiment:
@@ -48,7 +51,7 @@ Here are some examples.
 * *right*: the ground truth image (digit in brackets)
 
 ![example](plots/examples/8-1141.gif)
-![example](plots/exaples/0-1924.gif)
+![example](plots/examples/0-1924.gif)
 ![example](plots/examples/6-4763.gif)
 ![example](plots/examples/9-0371.gif)
 
@@ -89,3 +92,7 @@ Each experiment produces two files:
 
 which are written to a subfolder `{exp_name}` in `experiments` (configurable via command line).
 
+## Resources
+
+* Alex Graves: ["Generating Sequences With Recurrent Neural Networks"](https://arxiv.org/pdf/1308.0850)
+* Andrej Karpathy: ["The Unreasonable Effectiveness of Recurrent Neural Networks"](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)
