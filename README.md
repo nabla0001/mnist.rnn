@@ -6,7 +6,7 @@ A fun little project to learn how to train Recurrent Neural Networks (RNN) in Py
 
 Many of us have classified MNIST images before, but let's try something different to explore the magic of RNNs.
 
-First, let's flatten the 28x28 images of handwritten digits into sequences of their pixel values.
+First, let's flatten the 28x28 images of handwritten digits into sequences of pixel values.
 
 In phase 1 (*training*), we'll train an RNN to predict 
 a single next pixel given a sequence of pixels. In phase 2 (*testing*), we'll then ask: can this RNN generate realistic-looking
