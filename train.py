@@ -47,8 +47,6 @@ if __name__ == '__main__':
     batch_size = 128
     learning_rate = 0.01
     num_epochs = 50
-    momentum = 0.9
-    weight_decay = 1e-4
     learning_rate_scheduler_kwargs = {'milestones': [10, 20], 'gamma': 0.1}
 
     # data
@@ -80,8 +78,6 @@ if __name__ == '__main__':
             'batch_size': batch_size,
             'learning_rate': learning_rate,
             'num_epochs': num_epochs,
-            'momentum': momentum,
-            'weight_decay': weight_decay,
             'learning_rate_scheduler_kwargs': learning_rate_scheduler_kwargs,
         },
         'args': args
