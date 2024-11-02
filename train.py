@@ -45,14 +45,16 @@ if __name__ == '__main__':
 
     # hyperparameters
     batch_size = 128
-    learning_rate = 0.001
-    num_epochs = 20
+    learning_rate = 0.01
+    num_epochs = 50
     momentum = 0.9
     weight_decay = 1e-4
-    learning_rate_scheduler_kwargs = {'milestones': [4, 8], 'gamma': 0.1}
+    learning_rate_scheduler_kwargs = {'milestones': [10, 20], 'gamma': 0.1}
 
     # data
-    train_loader, val_loader, test_loader = mnist_data_loaders(batch_size, data_dir=args.data_dir, binarise=True)
+    train_loader, val_loader, test_loader = mnist_data_loaders(batch_size,
+                                                               data_dir=args.data_dir,
+                                                               binarise=True)
 
     # model
     model = RNN(args.hidden_size, args.num_layers, args.dropout)
@@ -134,5 +136,5 @@ if __name__ == '__main__':
         # save model checkpoint
         torch.save(model.state_dict(), checkpoint_path)
 
-    # save results
-    save_experiment(experiment, experiment_path)
+        # save experiment
+        save_experiment(experiment, experiment_path)
