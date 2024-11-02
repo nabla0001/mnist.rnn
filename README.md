@@ -32,7 +32,7 @@ Here are the details of the first experiment:
 
 ## Results
 
-After just a two or three epochs the model starts completing many digits sensibly:
+After just a few epochs the model starts completing many digits sensibly:
 it knows where the digits need to continue; it also frequently infers correctly
 which digit it needs to draw based on the occluded digit - something that is not always obvious.
 It then gets their overall gestalt right. 
