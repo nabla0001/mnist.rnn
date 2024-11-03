@@ -50,23 +50,15 @@ Here are some examples.
 * *center*: the completion by the model (284 pixels)
 * *right*: the ground truth image (digit in brackets)
 
-![example](plots/examples/8-1141.gif)
-![example](plots/examples/0-1924.gif)
-![example](plots/examples/6-4763.gif)
-![example](plots/examples/9-0371.gif)
+![example](plots/examples/8-3705.gif)
+![example](plots/examples/0-3217.gif)
+![example](plots/examples/3-4944.gif)
+![example](plots/examples/6-2985.gif)
+![example](plots/examples/9-0643.gif)
 
-However, there are also still failure cases.
+There are still occasional failure cases like this 5:
 
-E.g. the model sometimes randomly adds bottoms of 8s like for this 4.
-
-![example 0](plots/examples/4-2147.gif)
-
-It's also not very good at the left-swinging bottoms of 3s and 5s and typically
-just completes them downward.
-
-![example 0](plots/examples/3-0687.gif)
-![example 0](plots/examples/5-3577.gif)
-
+![example 0](plots/examples/5-3884.gif)
 
 ## Usage
 
