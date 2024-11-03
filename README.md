@@ -113,8 +113,8 @@ which are written to a subfolder `{exp_name}` in `experiments` (configurable via
 
 [2] Andrej Karpathy: ["The Unreasonable Effectiveness of Recurrent Neural Networks"](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)
 
-[3] Samy Bengio, Oriol Vinyals, Navdeep Jaitly and Noam Shazeer: ["Scheduled Sampling for Sequence Prediction with
+[3] Samy Bengio, Oriol Vinyals, Navdeep Jaitly and Noam Shazeer. 2015. ["Scheduled Sampling for Sequence Prediction with
 Recurrent Neural Networks"](https://arxiv.org/pdf/1506.03099)
 
-[4] Alex Lamb, Anirudh Goyal, Ying Zhang , Saizheng Zhang, Aaron Courville, Yoshua Bengio: ["Professor Forcing: A New Algorithm for Training
+[4] Alex Lamb, Anirudh Goyal, Ying Zhang , Saizheng Zhang, Aaron Courville, Yoshua Bengio. 2016. ["Professor Forcing: A New Algorithm for Training
 Recurrent Networks"](https://arxiv.org/pdf/1610.09038)
