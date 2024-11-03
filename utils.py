@@ -65,7 +65,7 @@ def complete_mnist(model: torch.nn.Module,
 
             given_pixels.append(input)
 
-            generated = model.sample(input, n_steps=n_steps)  # N x n_steps x 1
+            generated, _ = model.sample(input, n_steps=n_steps)  # N x n_steps x 1
             generated = generated.squeeze()
 
             generated_pixels.append(generated)

@@ -18,7 +18,10 @@ class RNN(nn.Module):
         output = self.sigmoid(output)
         return output, hidden
 
-    def sample(self, input: torch.Tensor, hidden: torch.Tensor = None, n_steps: int = 1) -> torch.Tensor:
+    def sample(self,
+               input: torch.Tensor,
+               hidden: torch.Tensor = None,
+               n_steps: int = 1) -> [torch.Tensor, torch.Tensor]:
         """Generates a pixel sequence given an input pixel sequence one at a time.
         The output pixel at step (t) is used as the input at (t+1).
         """
@@ -34,4 +37,4 @@ class RNN(nn.Module):
             for i in range(n_steps):
                 input, hidden = self.forward(input, hidden)
                 outputs[:, i] = input.squeeze() # Nx1
-            return outputs
+            return outputs, hidden
