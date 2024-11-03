@@ -62,7 +62,7 @@ There are still failure cases like this 5:
 
 ## Limitations & improvements
 
-The model is trained fully via teacher forcing which means that at each time step it receives the "correct" observed
+The simple model here is trained fully via teacher forcing which means that at each time step it receives the "correct" observed
 pixel from each training example as input. 
 The advantage is this approach is that it provides strong supervision and the model learns fast.
 
