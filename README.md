@@ -60,6 +60,29 @@ There are still occasional failure cases like this 5:
 
 ![example 0](plots/examples/5-3884.gif)
 
+## Limitations & improvements
+
+The model is trained fully via teacher forcing which means that at each time step it receives the "correct" observed
+pixel from each training example as input. 
+The advantage is this approach is that it provides strong supervision and the model learns fast.
+
+However, this is very different to what happens at test time when we ask the model to complete the digits. 
+Now, the model has no access to any ground truth. Instead, it is rolled out for almost 300 time steps and is using its own 
+prediction at step *t* as input at step *t+1*. Small prediction "errors" at early time steps will lead to atypical inputs 
+in the following time steps which in turn will lead to poorer predictions - a process that can easily compound over the 
+course of each generated sequence.
+
+One simple, intuitive way to address this issue is to simply let the model use its own prediction more during training
+and become more teacher-independent!
+For example, at each time step *t* we could randomly choose with some probability *p* whether to
+use teacher forcing or the model output. And it would probably make sense to use teacher forcing in the early stages
+of training and then use the model predictions more and more to gradually make training more
+similar to inference.
+
+This particular approach is called **scheduled sampling** and has been proposed by Bengio et al. in [3]. The teacher forcing 
+probability starts at 1.0 at the beginning of training and is then reduced via certain schedules (e.g. linear, exponential).
+Since then there have been extensions to this approach such as "Professor Forcing" [4] but the idea is the same.
+
 ## Usage
 
 You can re-create my `conda` environment via
@@ -86,5 +109,12 @@ which are written to a subfolder `{exp_name}` in `experiments` (configurable via
 
 ## Resources
 
-* Alex Graves: ["Generating Sequences With Recurrent Neural Networks"](https://arxiv.org/pdf/1308.0850)
-* Andrej Karpathy: ["The Unreasonable Effectiveness of Recurrent Neural Networks"](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)
+[1] Alex Graves: ["Generating Sequences With Recurrent Neural Networks"](https://arxiv.org/pdf/1308.0850)
+
+[2] Andrej Karpathy: ["The Unreasonable Effectiveness of Recurrent Neural Networks"](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)
+
+[3] Samy Bengio, Oriol Vinyals, Navdeep Jaitly and Noam Shazeer: ["Scheduled Sampling for Sequence Prediction with
+Recurrent Neural Networks"](https://arxiv.org/pdf/1506.03099)
+
+[4] Alex Lamb, Anirudh Goyal, Ying Zhang , Saizheng Zhang, Aaron Courville, Yoshua Bengio: ["Professor Forcing: A New Algorithm for Training
+Recurrent Networks"](https://arxiv.org/pdf/1610.09038)
