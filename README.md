@@ -109,9 +109,9 @@ which are written to a subfolder `{exp_name}` in `experiments` (configurable via
 
 ## Resources
 
-[1] Alex Graves: ["Generating Sequences With Recurrent Neural Networks"](https://arxiv.org/pdf/1308.0850)
+[1] Alex Graves. 2014. ["Generating Sequences With Recurrent Neural Networks"](https://arxiv.org/pdf/1308.0850)
 
-[2] Andrej Karpathy: ["The Unreasonable Effectiveness of Recurrent Neural Networks"](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)
+[2] Andrej Karpathy. 2015. ["The Unreasonable Effectiveness of Recurrent Neural Networks"](https://karpathy.github.io/2015/05/21/rnn-effectiveness/)
 
 [3] Samy Bengio, Oriol Vinyals, Navdeep Jaitly and Noam Shazeer. 2015. ["Scheduled Sampling for Sequence Prediction with
 Recurrent Neural Networks"](https://arxiv.org/pdf/1506.03099)
