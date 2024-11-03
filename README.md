@@ -56,7 +56,7 @@ Here are some examples.
 ![example](plots/examples/6-2985.gif)
 ![example](plots/examples/9-0643.gif)
 
-There are still occasional failure cases like this 5:
+There are still failure cases like this 5:
 
 ![example 0](plots/examples/5-3884.gif)
 
