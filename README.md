@@ -4,12 +4,12 @@ A fun little project to get started with the Recurrent Neural Network (RNN) API 
 
 ## The idea
 
-Many of us have classified MNIST images before, but let's try something different to explore the magic of RNNs.
+Many of us have classified MNIST images before. Let's try something different to explore the magic of RNNs.
 
 First, let's flatten the 28x28 images of handwritten digits into sequences of pixel values.
 
 In phase 1 (*training*), we'll train an RNN to predict 
-a single next pixel given a sequence of pixels. In phase 2 (*testing*), we'll then ask: can this RNN generate realistic-looking
+the next pixel given a sequence of pixels. In phase 2 (*testing*), we'll then ask: can this RNN generate realistic-looking
 MNIST images? To test this we'll present the model with partially masked, unseen MNIST digits
 and ask it to complete them.
 
@@ -62,8 +62,8 @@ There are still failure cases like this 5:
 
 ## Limitations & improvements
 
-The simple model hereEv is trained fully via teacher forcing which means that at each time step it receives the "correct" observed
-pixel from each training example as input. 
+The simple model here is trained fully via *teacher forcing*. That means that at each time step it receives the ground truth
+pixel from each training example as input, rather than its own prediction. 
 The advantage is this approach is that it provides strong supervision and the model learns fast.
 
 However, this is very different to what happens at test time when we ask the model to complete the digits. 
@@ -73,7 +73,7 @@ in the following time steps which in turn will lead to poorer predictions - a pr
 course of each generated sequence.
 
 One simple, intuitive way to address this issue is to simply let the model use its own prediction more during training
-and become more teacher-independent!
+and become more teacher-independent.
 For example, at each time step *t* we could randomly choose with some probability *p* whether to
 use teacher forcing or the model output. And it would probably make sense to use teacher forcing in the early stages
 of training and then use the model predictions more and more to gradually make training more
